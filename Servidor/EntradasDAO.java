@@ -136,7 +136,28 @@ class EntradasDAO {
         return resultado;
     }
 
-    public boolean agregarEvento(){
+    public boolean agregarEvento(Evento evento){
         //Rellenar igual que antes con la sentencia INSERT. Esperar a definir correctamente la BBDD
+        try{
+            Statement st = conn.createStatement();
+            String sql = "INSERT INTO eventos (id,Artista,Fecha,Lugar,Ciudad,Entradas) VALUES (" + evento.getId() + ",'" + evento.getArtista() + "','" + evento.getFecha() + "','" + evento.getLugar() + "','" + evento.getCiudad() + "'," + evento.getEntradas();
+            int filas = st.executeUpdate(sql);
+
+            boolean resultado;
+
+            if(filas>0){
+                resultado = true;
+
+            }else{
+                resultado = false;
+            }
+        }catch(SQLException se){
+            System.out.println("SQLException: " + se.getMessage());
+            se.printStackTrace(System.out);
+        }
+            rs.close();
+            st.close();
+            conn.close();
+        }
     }
 }
