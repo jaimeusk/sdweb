@@ -155,9 +155,8 @@ class EntradasDAO {
             System.out.println("SQLException: " + se.getMessage());
             se.printStackTrace(System.out);
         }
-            rs.close();
-            st.close();
-            conn.close();
-        }
+        rs.close();
+        st.close();
+        conn.close();
     }
 }
