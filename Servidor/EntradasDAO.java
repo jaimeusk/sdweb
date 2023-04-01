@@ -173,11 +173,11 @@ class EntradasDAO {
             while(rs.next()){
                 Evento evento = new Evento();
                 evento.setId(rs.getInt("idEvento"));
-                evento.setArtista(rs.getString("Artista"));
-                evento.setFecha(rs.getString("Fecha"));
-                evento.setLugar(rs.getString("Lugar"));
-                evento.setCiudad(rs.getString("Ciudad"));
-                evento.setNumero(rs.getInt("Entradas"));
+                evento.setArtista(rs.getString("artista"));
+                evento.setFecha(rs.getString("fecha"));
+                evento.setLugar(rs.getString("lugar"));
+                evento.setCiudad(rs.getString("ciudad"));
+                evento.setEntradas(rs.getInt("numentradas"));
                 lista.add(evento);
             }
         }catch(SQLException se){
