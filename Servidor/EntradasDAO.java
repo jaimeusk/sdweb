@@ -12,7 +12,7 @@ class EntradasDAO {
             Class.forName("org.postgresql.Driver");
              
             //Definición de la cadena de conexión
-            String url = "jdbc:postgresql://localhost:8001/entradas_bd";
+            String url = "jdbc:postgresql://localhost:8001/entradas_db";
             String user = "rmi";
             String pass = "rmi20";
 
@@ -218,7 +218,7 @@ class EntradasDAO {
             }
             rs.close();
             st.close();
-            conn.close();
+            
         }catch(SQLException se){
             System.out.println("SQLException: " + se.getMessage());
             se.printStackTrace(System.out);
