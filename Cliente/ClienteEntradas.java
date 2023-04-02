@@ -239,10 +239,9 @@ class ClienteEntrada {
 				identEntrada = ent.nextLine();
 			    System.out.print("\n");
 			    
-			    entrada = srv.detalleEntrada(DNI, identEntrada); //Se podría incluir un nuevo método para poder comprobar de forma detalla la información de una entrada en particular. Habría que introducir tambíen una forma para comprobar si existe la entrada para dicho usuario o no
+			    entr = srv.detalleEntrada(DNI, identEntrada); //Se podría incluir un nuevo método para poder comprobar de forma detalla la información de una entrada en particular. Habría que introducir tambíen una forma para comprobar si existe la entrada para dicho usuario o no
 
-			    Entrada entr = new Entrada();
-			    entrada = listaEntradasCompradas.get(0);
+			    
 			    
 			    System.out.println("---------------------------------------------");
 			    System.out.println("ID DE LA ENTRADA: " + entr.getId());
