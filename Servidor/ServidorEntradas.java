@@ -1,10 +1,11 @@
 import java.rmi.*;
 import java.rmi.server.*;
+import java.util.*;
 
 class ServidorEntradas{
 
     static public void main(String args[]){
-        if(args.length()!=1){
+        if(args.length!=1){
             System.err.println("Uso: ServidorEntradas numPuertoRegistro\n");
             return;
         }

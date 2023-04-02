@@ -1,6 +1,7 @@
 import java.rmi.*;
 import java.rmi.server.*;
 import java.util.*;
+import java.sql.*;
 
 class ServicioEntradasImpl extends UnicastRemoteObject implements ServicioEntradas {
 
@@ -10,9 +11,9 @@ class ServicioEntradasImpl extends UnicastRemoteObject implements ServicioEntrad
     private List<Evento> lista;
     private List<Entrada> lista_entradas;
 
-    public ServicioEntradasImpl() throws RemoteException{
+    public ServicioEntradasImpl() throws RemoteException,Exception{
         
-        entradasDAO = new entradasDAO();
+        entradasDAO = new EntradasDAO();
         lista = new ArrayList<Evento>();
         lista_entradas = new ArrayList<Entrada>();
 

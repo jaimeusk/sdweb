@@ -1,4 +1,5 @@
 import java.rmi.*;
+import java.util.*;
 
 interface ServicioEntradas extends Remote {
     Entrada comprarEntrada(int idEvento,int entradasSolicitadas,String nombre,String dni) throws RemoteException;

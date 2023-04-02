@@ -55,7 +55,7 @@ class Entrada implements Serializable{
         return ciudad;
     }
 
-    public String getEntradas(){
+    public int getEntradas(){
         return numEntradas;
     }
 }
