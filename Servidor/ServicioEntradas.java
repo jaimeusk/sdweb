@@ -7,4 +7,5 @@ interface ServicioEntradas extends Remote {
     boolean agregarEvento(Evento evento) throws RemoteException;
     List<Evento> listarEventos() throws RemoteException;
     List<Entrada> listarEntradas(String dni) throws RemoteException;
+    boolean cancelarSesión() throws RemoteException;
 }

@@ -29,21 +29,28 @@ class EntradasDAO {
         };
     };
 
-    public Entrada obtenerEntrada(int idEvento,int entradasSolicitadas,String nombre,String dni){
+    public Entrada obtenerEntrada(int idEvento,int entradasSolicitadas,String nombre,String dni) {
         Entrada entrada = new Entrada();
         try{
 
             Statement st = conn.createStatement();
             String sql = "SELECT * FROM eventos WHERE idevento=" + idEvento;
             ResultSet rs = st.executeQuery(sql);
+            int id = 0;
+            String artista = "";
+            int numEntradas_disponibles = 0;
+            String fecha = "";
+            String lugar = "";
+            String ciudad = "";
             
-
-            int id = rs.getInt("idevento");
-            String artista = rs.getString("artista");
-            int numEntradas_disponibles = rs.getInt("numentradas");
-            String fecha = rs.getString("fecha");
-            String lugar = rs.getString("lugar");
-            String ciudad = rs.getString("ciudad");
+            while(rs.next()){
+                id = rs.getInt("idevento");
+                artista = rs.getString("artista");
+                numEntradas_disponibles = rs.getInt("numentradas");
+                fecha = rs.getString("fecha");
+                lugar = rs.getString("lugar");
+                ciudad = rs.getString("ciudad");
+            }
             rs.close();
             st.close();
 
@@ -64,7 +71,7 @@ class EntradasDAO {
                     System.out.println("Error en obtenerEntrada() al actualizar las entradas");
                 }
             }
-            conn.close();
+            
         }
         catch(SQLException se){
             System.out.println("SQLException: " + se.getMessage());
@@ -75,14 +82,14 @@ class EntradasDAO {
         
     }
 
-    public boolean actualizar(int idEvento,int solicitadas,int disponibles,String nombre,String dni){
+    public boolean actualizar(int idEvento,int solicitadas,int disponibles,String nombre,String dni) {
         boolean resultado = false;
         try {
 
             Statement st = conn.createStatement();
             int resta = disponibles-solicitadas;
-            String sql = "UPDATE eventos SET numentradas=" + resta + " WHERE id=" + idEvento;
-            String sql2 = "INSERT INTO compras (idevento,nombre,dni,cantidad) VALUES (" + idEvento + ",'" + nombre + "','" + dni + "'," + solicitadas;
+            String sql = "UPDATE eventos SET numentradas=" + resta + " WHERE idevento=" + idEvento;
+            String sql2 = "INSERT INTO compras (idevento,nombre,dni,cantidad) VALUES (" + idEvento + ",'" + nombre + "','" + dni + "'," + solicitadas + ")";
             int filas = st.executeUpdate(sql);
             int filas2 = st.executeUpdate(sql2);
             
@@ -94,7 +101,7 @@ class EntradasDAO {
             else{
                 resultado = false;
             }
-            conn.close();
+            
         }catch(SQLException se){
             System.out.println("SQLException: " + se.getMessage());
             se.printStackTrace(System.out);
@@ -108,16 +115,20 @@ class EntradasDAO {
 
     }
 
-    public boolean borrarEntrada(int idCompra){
+    public boolean borrarEntrada(int idCompra) {
         boolean resultado = false;
+        int entradas_compradas = 0;
+        int idEvento = 0;
         try{
             Statement st = conn.createStatement();
-            String sql_select = "SELECT idevento FROM compras WHERE idcompra=" + idCompra;
+            String sql_select = "SELECT * FROM compras WHERE idcompra=" + idCompra;
             String sql_delete = "DELETE FROM compras WHERE idcompra=" + idCompra;
     
             ResultSet rs = st.executeQuery(sql_select);
-            int idEvento = rs.getInt("idevento");
-            int entradas_compradas = rs.getInt("cantidad");
+            while(rs.next()){
+                idEvento = rs.getInt("idevento");
+                entradas_compradas = rs.getInt("cantidad");
+            }
             rs.close();
 
             String sql_update = "UPDATE eventos SET numentradas=numentradas + " + entradas_compradas + " WHERE idevento=" + idEvento;  //Sería necesario pasar el número de entradas que se quieren cancelar
@@ -134,7 +145,7 @@ class EntradasDAO {
             else{
                 resultado = false;
             }
-            conn.close();
+            
         }catch(SQLException se){
             System.out.println("SQLException: " + se.getMessage());
             se.printStackTrace(System.out);
@@ -143,7 +154,7 @@ class EntradasDAO {
         return resultado;
     }
 
-    public boolean agregarEvento(Evento evento){
+    public boolean agregarEvento(Evento evento) {
         //Rellenar igual que antes con la sentencia INSERT. Esperar a definir correctamente la BBDD
         boolean resultado = false;
         try{
@@ -160,7 +171,7 @@ class EntradasDAO {
             }else{
                 resultado = false;
             }
-            conn.close();
+            
         }catch(SQLException se){
             System.out.println("SQLException: " + se.getMessage());
             se.printStackTrace(System.out);
@@ -171,7 +182,7 @@ class EntradasDAO {
         return resultado;
     }
 
-    public List<Evento> listarEventos(){
+    public List<Evento> listarEventos() {
         List<Evento> lista = new ArrayList<Evento>();
         try{
             Statement st = conn.createStatement();
@@ -189,7 +200,7 @@ class EntradasDAO {
                 lista.add(evento);
             }
             st.close();
-            conn.close();
+            
         }catch(SQLException se){
             System.out.println("SQLException: " + se.getMessage());
             se.printStackTrace(System.out);
@@ -199,16 +210,16 @@ class EntradasDAO {
         return lista;
     }
 
-    public List<Entrada> listarEntradas(String dni){
+    public List<Entrada> listarEntradas(String dni) {
         List<Entrada> lista = new ArrayList<Entrada>();
         try{
             Statement st = conn.createStatement();
-            String sql = "SELECT * FROM compras WHERE dni='" + dni + "'";
+            String sql = "SELECT * FROM eventos NATURAL JOIN compras  WHERE dni='" + dni + "'";
             ResultSet rs = st.executeQuery(sql);
             
             while(rs.next()){
                 Entrada entrada = new Entrada();
-                entrada.setId(rs.getInt("idevento"));
+                entrada.setId(rs.getInt("idcompra"));
                 entrada.setArtista(rs.getString("artista"));
                 entrada.setCiudad(rs.getString("ciudad"));
                 entrada.setLugar(rs.getString("lugar"));
@@ -226,5 +237,19 @@ class EntradasDAO {
         
         
         return lista;
+    }
+
+    public boolean cerraBBDD() {
+        boolean resultado = false;
+        try{
+
+            conn.close();
+            resultado = true;
+
+        }catch(SQLException se){
+            System.out.println("SQLException: " + se.getMessage());
+            se.printStackTrace(System.out);
+        }
+        return resultado;
     }
 }

@@ -3,7 +3,7 @@ import java.rmi.*;
 import java.rmi.server.*;
 import java.lang.Thread;
 
-class ClienteEntrada {
+class ClienteEntradas {
     static public void main (String args[]) {
 	if (args.length!=2) {
 	    System.err.println("Uso: ClienteEntrada hostregistro numPuertoRegistro");
@@ -146,7 +146,7 @@ class ClienteEntrada {
 			System.out.print("\n");
 
 			
-			if((srv.cancelarEntrada) == true)
+			if((srv.cancelarEntrada(idCompra)) == true)
 			    System.out.println("¡¡ENTRADA ANULADA CON ÉXITO!!\n");
 			else
 			    System.out.println("FALLO ANULANDO LA ENTRADA. POR FAVOR, INTENTELO DE NUEVO MÁS TARDE...\n");
@@ -214,8 +214,9 @@ class ClienteEntrada {
 				while (i.hasNext()) {
 				    Entrada entra =  (Entrada) i.next();
 				    System.out.println("--------------------------------------------");
-				    System.out.println("> ID DE LA ENTRADA: " + entra.getId());
+				    System.out.println("> ID DE LA COMPRA DE LA ENTRADA: " + entra.getId());
 				    System.out.println("> NOMBRE DEL ARTISTA: " + entra.getArtista());
+					System.out.println("> CANTIDAD DE ENTRADAS COMPRADAS: " + entra.getEntradas());
 				    System.out.println("--------------------------------------------");
 				}
 			    }
@@ -228,7 +229,7 @@ class ClienteEntrada {
 			    }
 			    			    
 		    }
-		        case 5: {
+		        /*case 5: {
 			
 			    System.out.println("===========================");
 			    System.out.println("| DETALLES DE UNA ENTRADA |");
@@ -239,16 +240,16 @@ class ClienteEntrada {
 				identEntrada = ent.nextLine();
 			    System.out.print("\n");
 			    
-			    entr = srv.detalleEntrada(DNI, identEntrada); //Se podría incluir un nuevo método para poder comprobar de forma detalla la información de una entrada en particular. Habría que introducir tambíen una forma para comprobar si existe la entrada para dicho usuario o no
+			    ent = srv.detalleEntrada(DNI, identEntrada); //Se podría incluir un nuevo método para poder comprobar de forma detalla la información de una entrada en particular. Habría que introducir tambíen una forma para comprobar si existe la entrada para dicho usuario o no
 
 			    
 			    
 			    System.out.println("---------------------------------------------");
-			    System.out.println("ID DE LA ENTRADA: " + entr.getId());
-			    System.out.println("NOMBRE DEL ARTISTA: " + entr.getArtista());
-			    System.out.println("FECHA DEL EVENTO: " + entr.getFecha());
-			    System.out.println("CIUDAD DONDE SE CELEBRA: " + entr.getCiudad());
-			    System.out.println("LUGAR DEL EVENTO: " + entr.getLugar());
+			    System.out.println("ID DE LA ENTRADA: " + ent.getId());
+			    System.out.println("NOMBRE DEL ARTISTA: " + ent.getArtista());
+			    System.out.println("FECHA DEL EVENTO: " + ent.getFecha());
+			    System.out.println("CIUDAD DONDE SE CELEBRA: " + ent.getCiudad());
+			    System.out.println("LUGAR DEL EVENTO: " + ent.getLugar());
 			    System.out.println("---------------------------------------------\n");
 
 			    System.out.print("> Pulse enter para continuar\n>");
@@ -257,12 +258,18 @@ class ClienteEntrada {
 				break;
 			    }
 			    			    
-		    }
-		        case 6: {
+		    }*/
+		        case 5: {
 			    
 			    System.out.println("SALIENDO DE LA VENTA DE ENTRADAS...");
-			    Thread.sleep(2000);
-			    return;
+				if(srv.cancelarSesión()){
+					System.out.println("SESIÓN CERRADA CORRECTAMENTE...");
+					Thread.sleep(2000);
+			    	return;
+				}else{
+					System.out.println("ERROR AL CERRAR LA SESIÓN...");
+				}
+			    
 			    
 		    }
 		        default: {

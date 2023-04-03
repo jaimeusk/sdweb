@@ -1,7 +1,7 @@
 import java.io.*;
 
 class Entrada implements Serializable{
-    private int idEvento;
+    private int idCompra;
     private String artista;
     private String fecha;
     private String lugar;
@@ -12,7 +12,7 @@ class Entrada implements Serializable{
     
     
     public void setId(int id){
-        this.idEvento = id;
+        this.idCompra = id;
     }
 
     public void setArtista(String artista){
@@ -36,7 +36,7 @@ class Entrada implements Serializable{
     }
 
     public int getId(){
-        return idEvento;
+        return idCompra;
     }
 
     public String getArtista(){

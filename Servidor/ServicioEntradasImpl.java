@@ -53,4 +53,9 @@ class ServicioEntradasImpl extends UnicastRemoteObject implements ServicioEntrad
         return lista_entradas;
 
     }
+
+    public boolean cancelarSesión() throws RemoteException{
+        resultado = entradasDAO.cerraBBDD();
+        return resultado;
+    }
 }
