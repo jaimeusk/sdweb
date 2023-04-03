@@ -262,13 +262,13 @@ class ClienteEntradas {
 		        case 5: {
 			    
 			    System.out.println("SALIENDO DE LA VENTA DE ENTRADAS...");
-				if(srv.cancelarSesión()){
-					System.out.println("SESIÓN CERRADA CORRECTAMENTE...");
+				/*if(srv.cancelarSesión()){
+					System.out.println("SESIÓN CERRADA CORRECTAMENTE...");*/
 					Thread.sleep(2000);
 			    	return;
-				}else{
+				/*}else{
 					System.out.println("ERROR AL CERRAR LA SESIÓN...");
-				}
+				}*/
 			    
 			    
 		    }

@@ -239,7 +239,7 @@ class EntradasDAO {
         return lista;
     }
 
-    public boolean cerraBBDD() {
+    /*public boolean cerraBBDD() {
         boolean resultado = false;
         try{
 
@@ -251,5 +251,5 @@ class EntradasDAO {
             se.printStackTrace(System.out);
         }
         return resultado;
-    }
+    }*/
 }
