@@ -12,7 +12,7 @@ class EntradasDAO {
             Class.forName("org.postgresql.Driver");
              
             //Definición de la cadena de conexión
-            String url = "jdbc:postgresql://localhost:8001/entradas_db";
+            String url = "jdbc:postgresql://85.208.20.152:8083/entradas_db";
             String user = "rmi";
             String pass = "rmi20";
 
