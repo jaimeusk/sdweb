@@ -16,8 +16,22 @@ class EventosDAO {
     public boolean agregarEvento(Evento evento){
         
         try{
+            Statement stAux = conn.createStatement();
+            String sqlAux = "SELECT MAX(idevento) FROM eventos";
+            ResultSet rsAux = stAux.executeQuery(sqlAux);
+            int ultimoIdEvento = 0;
+
+            
+            while(rsAux.next()){
+                ultimoIdEvento = rsAux.getInt("max") + 1;
+            }
+            rsAux.close();
+            stAux.close();
+
+            
             Statement st = conn.createStatement();
-            String sql = "INSERT INTO eventos (idevento, artista,fecha,lugar,ciudad,numentradas) VALUES (250,'" + evento.getArtista() + "','" + evento.getFecha() + "','" + evento.getLugar() + "','" + evento.getCiudad() + "'," + evento.getEntradas() + ")";
+            
+            String sql = "INSERT INTO eventos (idevento, artista,fecha,lugar,ciudad,numentradas) VALUES (" + ultimoIdEvento + ",'" + evento.getArtista() + "','" + evento.getFecha() + "','" + evento.getLugar() + "','" + evento.getCiudad() + "'," + evento.getEntradas() + ")";
             System.out.println(sql);
             int filas = st.executeUpdate(sql);
 
@@ -44,14 +58,26 @@ class EventosDAO {
 
         try{
             Statement st = conn.createStatement();
-            String sql_deleteE = "DELETE FROM eventos WHERE idevento=" + idEvento;
-            String sql_deleteC = "DELETE FROM compras WHERE idevento=" + idEvento;
             
-            int filasE = st.executeUpdate(sql_deleteE);
+            // Borrar primero las entradas para evitar problemas de FK
+            String sql_deleteC = "DELETE FROM compras WHERE idevento=" + idEvento;
             int filasC = st.executeUpdate(sql_deleteC);
+            if(filasC>0){
+                System.out.println("Entradas evento " + idEvento + " eliminadas correctamente\n");
+            }
+            else{
+                System.out.println("Error al eliminar el evento o no hay entradas asociadas a " + idEvento + "\n");
+            }
+
+
+            String sql_deleteE = "DELETE FROM eventos WHERE idevento=" + idEvento;
+            int filasE = st.executeUpdate(sql_deleteE);
+            
             st.close();
-    
-            if(filasE>0 && filasC>0){
+            
+            // Solo comprobar el borrado del evento, ya que no todos los eventos tienen entradas asociadas
+            // y devuelve errores.
+            if(filasE>0){
                 System.out.println("Evento " + idEvento + " eliminado correctamente\n");
                 resultado = true;
             }
@@ -71,7 +97,7 @@ class EventosDAO {
         
         try{
             Statement st = conn.createStatement();
-            String sql = "SELECT * FROM eventos WHERE idevento="+idEvento;
+            String sql = "SELECT 1 FROM eventos WHERE idevento="+idEvento;
             ResultSet rs = st.executeQuery(sql);
                       
             
@@ -83,6 +109,8 @@ class EventosDAO {
                 evento.setLugar(rs.getString("lugar"));
                 evento.setCiudad(rs.getString("ciudad"));
             }
+
+            System.out.println("Evento " + idEvento +" obtenido con éxito\n");
 
             rs.close();
             st.close();
@@ -102,26 +130,27 @@ class EventosDAO {
 
         try{
             Statement st = conn.createStatement();
-            String sql = "SELECT * FROM eventos";
+            String sql = "SELECT * FROM eventos ORDER BY idevento";
             ResultSet rs = st.executeQuery(sql);
             
             while(rs.next()){
                 Evento evento = new Evento();
-                evento.setId(rs.getInt("idEvento"));
+                evento.setId(rs.getInt("idevento"));
                 evento.setArtista(rs.getString("artista"));
                 evento.setFecha(rs.getString("fecha"));
                 evento.setLugar(rs.getString("lugar"));
                 evento.setCiudad(rs.getString("ciudad"));
                 evento.setEntradas(rs.getInt("numentradas"));
                 lista.add(evento);
-                System.out.println("Eventos agregados a la lista\n");
             }
-            //System.out.println("Eventos agregados a la lista\n");
+
+            System.out.println("Eventos agregados a la lista\n");
             rs.close();
             st.close();
 
             
         }catch(SQLException se){
+            System.out.println("ERROR AL OBTENER LISTA EVENTOS\n");
             System.out.println("SQLException: " + se.getMessage());
             se.printStackTrace(System.out);
         }

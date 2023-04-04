@@ -130,24 +130,28 @@ class ClienteEntradas {
 							}
 						
 						}
-						/*
+						
 						case 2: {
 							
 							System.out.println("========================");
-							System.out.println("| CANCELAR UNA ENTRADA |");
+							System.out.println("|   BORRAR UN EVENTO   |");
 							System.out.println("========================\n\n");
 							
-							System.out.print("> Introduzca el identificador de la compra de la entrada\n>"); //¿De donde se obtiene el id de la compra. No sería mejor introducir el id del evento y el dni del comprador?
+							System.out.print("> Introduzca el identificador del evento que desea borrar\n>"); //¿De donde se obtiene el id de la compra. No sería mejor introducir el id del evento y el dni del comprador?
 							if(ent.hasNextLine())
-								idCompra = Integer.parseInt(ent.nextLine());
+								idEvento = Integer.parseInt(ent.nextLine());
 							System.out.print("\n");
 
 							
-							if((srv.cancelarEntrada(idCompra)) == true)
-								System.out.println("¡¡ENTRADA ANULADA CON ÉXITO!!\n");
-							else
-								System.out.println("FALLO ANULANDO LA ENTRADA. POR FAVOR, INTENTELO DE NUEVO MÁS TARDE...\n");
-							
+							if((srvEvent.borrarEvento(idEvento))){
+								System.out.println("¡¡EVENTO BORRADO CON CON ÉXITO!!\n");
+								System.out.println("¡¡ENTRADAS ASOCIADAS AL EVENTO BORRADAS CON ÉXITO!!\n");
+							}
+
+							else {
+								System.out.println("ERROR AL BORRAR EL EVENTO.");
+								System.out.println("POR FAVOR, INTENTELO DE NUEVO MÁS TARDE O CONSULTE AL ADMINISTRADOR\n");
+							}
 
 							
 							System.out.print("> Pulse enter para continuar\n>");
@@ -155,14 +159,8 @@ class ClienteEntradas {
 								salto = ent.nextLine();
 								break;
 							}
-							
-							/*
-							System.out.print("> Introduzca el nombre del evento que desea cancelar\n>");
-							if(ent.hasNextLine())
-							idevento = ent.nextLine();
-							System.out.print("\n");
-							*/		
-					/*	}
+									
+						}
 					case 3: {
 					
 							System.out.println("==============================");
@@ -199,26 +197,31 @@ class ClienteEntradas {
 							case 4: {
 								
 								System.out.println("=================================");
-								System.out.println("| LISTAR MIS ENTRADAS COMPRADAS |");
+								System.out.println("| LISTAR DETALLES DE UN EVENTO  |");
 								System.out.println("=================================\n\n");
 								
-								System.out.println("> Se muestran todas sus entradas compradas");
-								listaEntradasCompradas = srv.listarEntradas(DNI); 
+								System.out.println("> Introduzca el identificador del evento que desea mostrar");
+
+								if(ent.hasNextLine())
+									idEvento = Integer.parseInt(ent.nextLine());
+								System.out.print("\n");
+
+								evento = srvEvent.listarDetalleEvento(idEvento);
 								
-								if((listaEntradasCompradas.isEmpty()) == true) {
-								System.out.println("NO HAY NINGUNA ENTRADA COMPRADA");
+								if((evento.getId()) != idEvento) {
+								System.out.println("NO EXISTE UN EVENTO CON ESE IDENTIFICADOR");
 								}
 								else {
-								Iterator i = listaEntradasCompradas.iterator();
-								while (i.hasNext()) {
-									Entrada entra =  (Entrada) i.next();
 									System.out.println("--------------------------------------------");
-									System.out.println("> ID DE LA COMPRA DE LA ENTRADA: " + entra.getId());
-									System.out.println("> NOMBRE DEL ARTISTA: " + entra.getArtista());
-									System.out.println("> CANTIDAD DE ENTRADAS COMPRADAS: " + entra.getEntradas());
+									System.out.println("> ID DEL EVENTO: " + evento.getId());
+									System.out.println("> NOMBRE DEL ARTISTA: " + evento.getArtista());
+									System.out.println("> FECHA DEL EVENTO: " + evento.getFecha());
+									System.out.println("> CIUDAD DONDE SE CELEBRA: " + evento.getCiudad());
+									System.out.println("> LUGAR DEL EVENTO: " +  evento.getLugar());
+									System.out.println("> NUMERO DE ENTRADAS DISPONIBLES: " + evento.getEntradas());
 									System.out.println("--------------------------------------------");
 								}
-								}
+								
 								System.out.print("\n");
 								
 								System.out.print("> Pulse enter para continuar\n>");

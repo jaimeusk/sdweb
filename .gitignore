@@ -1,0 +1,6 @@
+#Ignorar archivos .class
+*.class
+
+#Ignorar carpeta vscode
+.vscode
+.vscode/*

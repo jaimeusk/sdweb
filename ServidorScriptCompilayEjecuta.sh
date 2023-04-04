@@ -1,4 +1,5 @@
 #!/bin/bash
+pkill rmiregistry
 cd Servidor
 rmiregistry -J-Djava.net.preferIPv4Stack=true 51000 &
 rmiregistry 54321 &

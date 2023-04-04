@@ -173,7 +173,7 @@ class EntradasDAO {
         List<Evento> lista = new ArrayList<Evento>();
         try{
             Statement st = conn.createStatement();
-            String sql = "SELECT * FROM eventos";
+            String sql = "SELECT * FROM eventos ORDER BY idEvento";
             ResultSet rs = st.executeQuery(sql);
             
             while(rs.next()){
@@ -186,6 +186,9 @@ class EntradasDAO {
                 evento.setEntradas(rs.getInt("numentradas"));
                 lista.add(evento);
             }
+            
+            System.out.println("Detalles del evento " + evento.getId() + " de " + evento.getArtista() + " obtenidos correctamente");
+            
             rs.close();
             st.close();
             
