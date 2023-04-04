@@ -35,4 +35,6 @@ class ServicioEventosImpl extends UnicastRemoteObject implements ServicioEventos
         listaEventos = eventosDAO.obtenerListaEventos();
         return listaEventos;
     }
+
+    //Probar un método que cierre la conexión con la bbdd (conn.close())
 }

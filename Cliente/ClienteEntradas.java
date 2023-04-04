@@ -70,7 +70,7 @@ class ClienteEntradas {
 					System.out.println("----------------------------------");
 					System.out.println("(4)>    LISTAR DETALLES EVENTO    ");
 					System.out.println("----------------------------------");
-					//System.out.println("") //AÑADIR EL MENU 5 DE LISTAS TODAS LAS ENTRADAS
+					//System.out.println("") //AÑADIR EL MENU 5 DE LISTAR TODAS LAS ENTRADAS
 	
 					System.out.print("Opción > ");
 					if(ent.hasNextLine())
@@ -283,6 +283,7 @@ class ClienteEntradas {
 				System.out.print("Introduzca su apellido \n>");
 				if (ent.hasNextLine())
 					apellido = ent.nextLine();
+					nombre = nombre + " " + apellido;
 				
 				System.out.print("Introduza su DNI \n>");
 				if (ent.hasNextLine())
@@ -302,7 +303,7 @@ class ClienteEntradas {
 				System.out.println("----------------------------------");
 				//System.out.println("(5)>   DETALLES DE UNA ENTRADA    ");
 				//System.out.println("----------------------------------");
-				System.out.println("(6)>           CANCELAR           ");
+				System.out.println("(5)>           CANCELAR           ");
 				System.out.println("----------------------------------");
 
 				System.out.print("Opción > ");
@@ -339,8 +340,15 @@ class ClienteEntradas {
 					entrada1.setEntradas(150);
 					listaEntradasCompradas.add(entrada1);
 					*/
-					Thread.sleep(2000);
-					System.out.println("¡¡ENTRADA COMPRADA CON ÉXITO!!\n");
+					if(entrada == null){
+						Thread.sleep(2000);
+						System.out.println("¡¡ERROR. EVENTO NO EXISTE!!\n");
+					}else if(entrada.getEntradas()!= 0){
+						Thread.sleep(2000);
+						System.out.println("¡¡ERROR. NO QUEDAN SUFICIENTES ENTRADAS DISPONIBLES. Entradas disponibles actualmente: " + entrada.getEntradas() + "\n");
+					}else{
+						Thread.sleep(2000);
+						System.out.println("¡¡ENTRADA COMPRADA CON ÉXITO!!\n");}
 					
 					System.out.print("> Pulse enter para continuar\n>");
 					if(ent.hasNextLine()){
@@ -411,7 +419,7 @@ class ClienteEntradas {
 					}
 							
 					
-					}
+				}
 					case 4: {
 						
 						System.out.println("=================================");
@@ -474,11 +482,13 @@ class ClienteEntradas {
 						}
 										
 					}*/
-					/*
+					
 						case 5: {
 						
 						
 						System.out.println("SALIENDO DE LA VENTA DE ENTRADAS...");
+						Thread.sleep(2000);
+						return;
 						/*if(srv.cancelarSesión()){
 							System.out.println("SESIÓN CERRADA CORRECTAMENTE...");*/
 							//Thread.sleep(2000);
@@ -488,7 +498,7 @@ class ClienteEntradas {
 						}*/
 						
 						
-					//}
+					}
 						default: {
 						
 						System.out.println("OPCIÓN NO VÁLIDA\n");

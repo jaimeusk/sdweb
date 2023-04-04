@@ -40,6 +40,9 @@ class EntradasDAO {
 
             if(numEntradas_disponibles<entradasSolicitadas){
                 entrada.setEntradas(numEntradas_disponibles);  //Hacer una impresion en el cliente informando que no quedan suficientes entradas disponibles
+                if(id == 0){
+                    entrada = null;
+                }
             }
             else{
                 boolean actualizar = actualizar(idEvento,entradasSolicitadas,numEntradas_disponibles,nombre,dni); //Actualizamos el número de entradas para el evento del que se han comprado

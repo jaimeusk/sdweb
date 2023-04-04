@@ -114,8 +114,9 @@ class EventosDAO {
                 evento.setCiudad(rs.getString("ciudad"));
                 evento.setEntradas(rs.getInt("numentradas"));
                 lista.add(evento);
+                System.out.println("Eventos agregados a la lista\n");
             }
-            System.out.println("Eventos agregados a la lista\n");
+            //System.out.println("Eventos agregados a la lista\n");
             rs.close();
             st.close();
 
