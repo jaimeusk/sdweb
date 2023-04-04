@@ -9,8 +9,17 @@ class Evento implements Serializable{
     private int numEntradas;
 
     public Evento(){}
+    
     public Evento(int id,String artista,String fecha,String lugar,String ciudad,int entradas){
         this.idEvento = id;
+        this.artista = artista;
+        this.fecha = fecha;
+        this.lugar = lugar;
+        this.ciudad = ciudad;
+        this.numEntradas = entradas;
+    }
+
+    public Evento(String artista,String fecha,String lugar,String ciudad,int entradas){
         this.artista = artista;
         this.fecha = fecha;
         this.lugar = lugar;

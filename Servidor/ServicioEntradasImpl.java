@@ -35,19 +35,6 @@ class ServicioEntradasImpl extends UnicastRemoteObject implements ServicioEntrad
 
     }
 
-    public boolean agregarEvento(Evento evento) throws RemoteException {
-
-        //EntradasDAO agregar = new EntradasDAO();
-        resultado = entradasDAO.agregarEvento(evento);
-        return resultado;
-
-    }
-
-    public List<Evento> listarEventos() throws RemoteException{
-        lista = entradasDAO.listarEventos();
-        return lista;
-    }
-
     public List<Entrada> listarEntradas(String dni) throws RemoteException{
         lista_entradas = entradasDAO.listarEntradas(dni);
         return lista_entradas;
