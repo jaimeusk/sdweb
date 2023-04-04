@@ -17,7 +17,8 @@ class EventosDAO {
         
         try{
             Statement st = conn.createStatement();
-            String sql = "INSERT INTO eventos (artista,fecha,lugar,ciudad,numentradas) VALUES (" + evento.getArtista() + "','" + evento.getFecha() + "','" + evento.getLugar() + "','" + evento.getCiudad() + "'," + evento.getEntradas();
+            String sql = "INSERT INTO eventos (idevento, artista,fecha,lugar,ciudad,numentradas) VALUES (250,'" + evento.getArtista() + "','" + evento.getFecha() + "','" + evento.getLugar() + "','" + evento.getCiudad() + "'," + evento.getEntradas() + ")";
+            System.out.println(sql);
             int filas = st.executeUpdate(sql);
 
             st.close();

@@ -36,7 +36,8 @@ class ClienteEntradas {
 			Entrada entrada = new Entrada();
 			Evento evento = new Evento();
 			ServicioEntradas srv = (ServicioEntradas) Naming.lookup("//" + args[0] + ":" + args[1] + "/Entrada");
-			ServicioEventos srvEvent = (ServicioEventos) Naming.lookup("//" + args[0] + ":" + args[2] + "/Eventos");
+			FabricaServicioEvento fabricaE = (FabricaServicioEvento) Naming.lookup("//" + args[0] + ":" + args[2] + "/Eventos");
+			ServicioEventos srvEvent = fabricaE.crearServicioEvento();
 			Scanner ent = new Scanner(System.in);
 			System.out.println("\n\n==================================");
 			System.out.println("| SERVICIO DE VENTAS DE ENTRADAS |");
