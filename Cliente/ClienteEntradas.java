@@ -3,8 +3,18 @@ import java.rmi.*;
 import java.rmi.server.*;
 import java.lang.Thread;
 
+
+import java.lang.ProcessBuilder;
+import java.io.File;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
 class ClienteEntradas {
-    static public void main (String args[]) {
+
+	private static int escenario;
+	private static int eleccion;
+
+	static public void main (String args[]) {
 	
 		if (args.length!=3) {
 	    	System.err.println("Uso: ClienteEntrada hostregistro numPuertoSrvEntradas numPuertoSrvEventos");
@@ -15,6 +25,8 @@ class ClienteEntradas {
 			System.setSecurityManager(new SecurityManager());
 
 		try {
+			String ruta;
+			String rutaFichero;
 			String nombre = "";
 			String apellido = "";
 			String DNI = "";
@@ -69,6 +81,8 @@ class ClienteEntradas {
 					System.out.println("(3)>  LISTAR EVENTOS DISPONIBLES  ");
 					System.out.println("----------------------------------");
 					System.out.println("(4)>    LISTAR DETALLES EVENTO    ");
+					System.out.println("----------------------------------");
+					System.out.println("(5)>           CANCELAR           ");
 					System.out.println("----------------------------------");
 					//System.out.println("") //AÑADIR EL MENU 5 DE LISTAR TODAS LAS ENTRADAS
 	
@@ -161,7 +175,7 @@ class ClienteEntradas {
 							}
 									
 						}
-					case 3: {
+						case 3: {
 					
 							System.out.println("==============================");
 							System.out.println("| LISTAR EVENTOS DISPONIBLES |");
@@ -194,74 +208,52 @@ class ClienteEntradas {
 							}
 
 							
-							case 4: {
-								
-								System.out.println("=================================");
-								System.out.println("| LISTAR DETALLES DE UN EVENTO  |");
-								System.out.println("=================================\n\n");
-								
-								System.out.println("> Introduzca el identificador del evento que desea mostrar");
-
-								if(ent.hasNextLine())
-									idEvento = Integer.parseInt(ent.nextLine());
-								System.out.print("\n");
-
-								evento = srvEvent.listarDetalleEvento(idEvento);
-								
-								if((evento.getId()) != idEvento) {
-								System.out.println("NO EXISTE UN EVENTO CON ESE IDENTIFICADOR");
-								}
-								else {
-									System.out.println("--------------------------------------------");
-									System.out.println("> ID DEL EVENTO: " + evento.getId());
-									System.out.println("> NOMBRE DEL ARTISTA: " + evento.getArtista());
-									System.out.println("> FECHA DEL EVENTO: " + evento.getFecha());
-									System.out.println("> CIUDAD DONDE SE CELEBRA: " + evento.getCiudad());
-									System.out.println("> LUGAR DEL EVENTO: " +  evento.getLugar());
-									System.out.println("> NUMERO DE ENTRADAS DISPONIBLES: " + evento.getEntradas());
-									System.out.println("--------------------------------------------");
-								}
-								
-								System.out.print("\n");
-								
-								System.out.print("> Pulse enter para continuar\n>");
-								if(ent.hasNextLine()){
-								salto = ent.nextLine();
-								break;
-								}
-										
-							}
+						case 4: {
 							
-							/*case 5: {
-					
-								System.out.println("===========================");
-								System.out.println("| DETALLES DE UNA ENTRADA |");
-								System.out.println("===========================\n\n");
+							System.out.println("=================================");
+							System.out.println("| LISTAR DETALLES DE UN EVENTO  |");
+							System.out.println("=================================\n\n");
 								
-								System.out.print("> Introduza el identificador de la entrada\n>");
-								if(ent.hasNextLine())
-								identEntrada = ent.nextLine();
-								System.out.print("\n");
-								
-								ent = srv.detalleEntrada(DNI, identEntrada); //Se podría incluir un nuevo método para poder comprobar de forma detalla la información de una entrada en particular. Habría que introducir tambíen una forma para comprobar si existe la entrada para dicho usuario o no
+							System.out.println("> Introduzca el identificador del evento que desea mostrar");
 
-								
-								
-								System.out.println("---------------------------------------------");
-								System.out.println("ID DE LA ENTRADA: " + ent.getId());
-								System.out.println("NOMBRE DEL ARTISTA: " + ent.getArtista());
-								System.out.println("FECHA DEL EVENTO: " + ent.getFecha());
-								System.out.println("CIUDAD DONDE SE CELEBRA: " + ent.getCiudad());
-								System.out.println("LUGAR DEL EVENTO: " + ent.getLugar());
-								System.out.println("---------------------------------------------\n");
+							if(ent.hasNextLine())
+								idEvento = Integer.parseInt(ent.nextLine());
+							System.out.print("\n");
 
-								System.out.print("> Pulse enter para continuar\n>");
-								if(ent.hasNextLine()){
+							evento = srvEvent.listarDetalleEvento(idEvento);
+								
+							if((evento.getId()) != idEvento) {
+							System.out.println("NO EXISTE UN EVENTO CON ESE IDENTIFICADOR");
+							}
+							else {
+								System.out.println("--------------------------------------------");
+								System.out.println("> ID DEL EVENTO: " + evento.getId());
+								System.out.println("> NOMBRE DEL ARTISTA: " + evento.getArtista());
+								System.out.println("> FECHA DEL EVENTO: " + evento.getFecha());
+								System.out.println("> CIUDAD DONDE SE CELEBRA: " + evento.getCiudad());
+								System.out.println("> LUGAR DEL EVENTO: " +  evento.getLugar());
+								System.out.println("> NUMERO DE ENTRADAS DISPONIBLES: " + evento.getEntradas());
+								System.out.println("--------------------------------------------");
+							}
+								
+							System.out.print("\n");
+								
+							System.out.print("> Pulse enter para continuar\n>");
+							if(ent.hasNextLine()){
 								salto = ent.nextLine();
 								break;
-								}
+							}
 										
-							}*/
+						}
+							
+						case 5: {
+					
+							System.out.println("SALIENDO DEL SERVICIO DE EVENTOS...");
+							Thread.sleep(2000);
+							return;
+						}
+										
+
 							default: {
 								System.out.println("OPCIÓN NO VÁLIDA\n");
 								System.out.print("> Pulse enter para continuar\n>");
@@ -272,8 +264,9 @@ class ClienteEntradas {
 								}
 							}
 					}
-					
-				} while(true);
+
+				}while(true);
+		
 
 
 			// COMIENZA EL MENU USUARIO
@@ -304,9 +297,9 @@ class ClienteEntradas {
 				System.out.println("----------------------------------");
 				System.out.println("(4)> LISTAR MIS ENTRADAS COMPRADAS");
 				System.out.println("----------------------------------");
-				//System.out.println("(5)>   DETALLES DE UNA ENTRADA    ");
-				//System.out.println("----------------------------------");
-				System.out.println("(5)>           CANCELAR           ");
+				System.out.println("(5)>   SELECCIONAR MIS ASIENTOS   ");
+				System.out.println("----------------------------------");
+				System.out.println("(6)>           CANCELAR           ");
 				System.out.println("----------------------------------");
 
 				System.out.print("Opción > ");
@@ -372,10 +365,14 @@ class ClienteEntradas {
 					System.out.print("\n");
 
 					
-					if((srv.cancelarEntrada(idCompra)) == true)
+					if((srv.cancelarEntrada(idCompra)) == true){
+						Thread.sleep(2000);
 						System.out.println("¡¡ENTRADA ANULADA CON ÉXITO!!\n");
-					else
+					}
+					else{
+						Thread.sleep(2000);
 						System.out.println("FALLO ANULANDO LA ENTRADA. POR FAVOR, INTENTELO DE NUEVO MÁS TARDE...\n");
+					}
 					
 
 					
@@ -485,10 +482,64 @@ class ClienteEntradas {
 						}
 										
 					}*/
+
+
+					case 5:	{
+
+						System.out.println("============================");
+						System.out.println("| SELECCIONAR MIS ASIENTOS |");
+						System.out.println("============================\n\n");
+						System.out.println("Seleccione la ubicación donde le gustaría estar");
+			
+						Thread.sleep(1000);
+						System.out.print("Seleccione el tipo de escenario\n>"); //Este numero te lo tendría que dar el servidor, y en función de esto, se llamaría a un gráfico o a otro.
+
+						if (ent.hasNextLine()) {
+			   				escenario = Integer.parseInt(ent.nextLine());
+						}
+
+						System.out.println("Mostrando escenario...");
+								 
+						Thread.sleep(1500);
+
+						ProcessBuilder pb = new ProcessBuilder();
+
+						if (escenario == 1) {
+
+		    				File fichero = new File("Grafico1.class");
+		    				ruta = fichero.getAbsolutePath();
+		    				rutaFichero = ruta.substring(0, ruta.length()-15);//15 pq es la longitud de GraficoX.class
+    
+		    				pb.command(Arrays.asList("java", "Grafico1"))
+							.directory(new File(rutaFichero));
+						}
+						else if (escenario == 2) {
+
+		    				File fichero = new File("Grafico2.class");
+		    				ruta = fichero.getAbsolutePath();
+		    				rutaFichero = ruta.substring(0, ruta.length()-15);
+			    
+		    				pb.command(Arrays.asList("java", "Grafico2"))
+		    				.directory(new File(rutaFichero));
+						}
+						else {
+
+		    				break;
+						}
+			    
+						Process proceso = pb.start();
+						BufferedReader br = new BufferedReader(new InputStreamReader(proceso.getInputStream()));
+						String line;
+						line = br.readLine();
+			    
+						proceso.waitFor();
+						System.out.println("La eleccion escogida ha sido: " + line);
+						break;
+					}
+
+					case 6: {
+						
 					
-						case 5: {
-						
-						
 						System.out.println("SALIENDO DE LA VENTA DE ENTRADAS...");
 						Thread.sleep(2000);
 						return;
@@ -502,7 +553,9 @@ class ClienteEntradas {
 						
 						
 					}
-						default: {
+					
+						
+					default: {
 						
 						System.out.println("OPCIÓN NO VÁLIDA\n");
 
@@ -523,20 +576,20 @@ class ClienteEntradas {
 
 	}
 
-	    
-	
-	catch (RemoteException e) {
-	    System.err.println("Error de comucicación: " + e.toString());
+	catch(
+
+	RemoteException e)
+	{
+		System.err.println("Error de comucicación: " + e.toString());
 	}
-	
-	catch (Exception e) {
-	    System.err.println("Excepción en ClienteEntrada: ");
-	    e.printStackTrace();
+
+	catch(
+	Exception e)
+	{
+		System.err.println("Excepción en ClienteEntrada: ");
+		e.printStackTrace();
 	}
-	
-    }
-    
+
 }
-	
-	
-	
+
+}
