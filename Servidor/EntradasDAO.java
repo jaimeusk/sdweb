@@ -169,7 +169,7 @@ class EntradasDAO {
         return resultado;
     }
 
-    public List<Evento> listarEventos() {
+    /*public List<Evento> listarEventos() {
         List<Evento> lista = new ArrayList<Evento>();
         try{
             Statement st = conn.createStatement();
@@ -199,7 +199,7 @@ class EntradasDAO {
         
         
         return lista;
-    }
+    }*/
 
     public List<Entrada> listarEntradas(String dni) {
         List<Entrada> lista = new ArrayList<Entrada>();

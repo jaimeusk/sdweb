@@ -97,7 +97,7 @@ class EventosDAO {
         
         try{
             Statement st = conn.createStatement();
-            String sql = "SELECT 1 FROM eventos WHERE idevento="+idEvento;
+            String sql = "SELECT * FROM eventos WHERE idevento="+idEvento;
             ResultSet rs = st.executeQuery(sql);
                       
             
