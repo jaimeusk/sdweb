@@ -584,7 +584,7 @@ class ClienteEntradas {
 							String salida;
 							salida = br.readLine();
 							
-							s
+							boolean 
 							proceso.waitFor();
 							System.out.println("La eleccion escogida ha sido: " + salida);
 							break;
