@@ -13,7 +13,7 @@ class EntradasDAO {
 
 
 
-    public Entrada obtenerEntrada(int idEvento,int entradasSolicitadas,String nombre,String dni) {
+    public Entrada obtenerEntrada(int idEvento,int entradasSolicitadas,String nombre,String dni,int numGrada) {
         Entrada entrada = new Entrada();
         try{
 
@@ -26,6 +26,7 @@ class EntradasDAO {
             String fecha = "";
             String lugar = "";
             String ciudad = "";
+            int tipoEstadio = 0;
             
             while(rs.next()){
                 id = rs.getInt("idevento");
@@ -34,6 +35,7 @@ class EntradasDAO {
                 fecha = rs.getString("fecha");
                 lugar = rs.getString("lugar");
                 ciudad = rs.getString("ciudad");
+                tipoEstadio = rs.getInt("tipoEstadio");
             }
             rs.close();
             st.close();
@@ -45,13 +47,14 @@ class EntradasDAO {
                 }
             }
             else{
-                boolean actualizar = actualizar(idEvento,entradasSolicitadas,numEntradas_disponibles,nombre,dni); //Actualizamos el número de entradas para el evento del que se han comprado
+                boolean actualizar = actualizar(idEvento,entradasSolicitadas,numEntradas_disponibles,nombre,dni,numGrada); //Actualizamos el número de entradas para el evento del que se han comprado
                 if(actualizar){
                     entrada.setId(id);
                     entrada.setArtista(artista);
                     entrada.setFecha(fecha);
                     entrada.setLugar(lugar);
                     entrada.setCiudad(ciudad);
+                    entrada.setGrada(numGrada);
                 }
                 else{
                     entrada = null;
@@ -69,14 +72,14 @@ class EntradasDAO {
         
     }
 
-    public boolean actualizar(int idEvento,int solicitadas,int disponibles,String nombre,String dni) {
+    public boolean actualizar(int idEvento,int solicitadas,int disponibles,String nombre,String dni,int numGrada) {
         boolean resultado = false;
         try {
 
             Statement st = conn.createStatement();
             int resta = disponibles-solicitadas;
             String sql = "UPDATE eventos SET numentradas=" + resta + " WHERE idevento=" + idEvento;
-            String sql2 = "INSERT INTO compras (idevento,nombre,dni,cantidad) VALUES (" + idEvento + ",'" + nombre + "','" + dni + "'," + solicitadas + ")";
+            String sql2 = "INSERT INTO compras (idevento,nombre,dni,cantidad,grada) VALUES (" + idEvento + ",'" + nombre + "','" + dni + "'," + solicitadas + "," + numGrada + ")";
             int filas = st.executeUpdate(sql);
             int filas2 = st.executeUpdate(sql2);
             
@@ -216,6 +219,7 @@ class EntradasDAO {
                 entrada.setLugar(rs.getString("lugar"));
                 entrada.setFecha(rs.getString("fecha"));
                 entrada.setEntradas(rs.getInt("cantidad"));
+                entrada.setGrada(rs.getInt(rs.getInt("grada")));
                 lista.add(entrada);
             }
             rs.close();
@@ -228,6 +232,30 @@ class EntradasDAO {
         
         
         return lista;
+    }
+
+
+    public boolean actualizaGrada(int numGrada,int idCompra){
+        boolean resultado = false;
+        try{
+            Statement st = conn.createStatement();
+            String sql = "UPDATE compras SET grada="+numGrada+" WHERE idcompra=" + idCompra;
+            int filas = st.executeUpdate(sql);
+            
+            if(filas>0){
+                System.out.println("Grada actualizada corrrectamente");
+                resultado = true;
+            }
+            
+            st.close();
+            
+        }catch(SQLException se){
+            System.out.println("SQLException: " + se.getMessage());
+            se.printStackTrace(System.out);
+        }
+        
+        return resultado;
+
     }
 
     /*public boolean cerraBBDD() {
@@ -243,4 +271,26 @@ class EntradasDAO {
         }
         return resultado;
     }*/
+
+    public int obtenerEscenario(int idCompra){
+        int escenario  = 0;
+        try{
+            Statement st = conn.createStatement();
+            String sql = "SELECT tipoEstadio FROM compras WHERE idcompra=" + idCompra;
+            ResultSet rs = st.executeQuery(sql);
+            
+           while(rs.next()){
+            escenario = rs.getInt("tipoEstadio");
+           }   
+           rs.close();         
+           st.close();
+            
+        }catch(SQLException se){
+            System.out.println("SQLException: " + se.getMessage());
+            se.printStackTrace(System.out);
+        }
+        
+        return escenario;
+
+    }
 }

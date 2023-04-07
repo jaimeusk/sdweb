@@ -584,10 +584,21 @@ class ClienteEntradas {
 							String grada;
 							grada = br.readLine();
 							
-							boolean cambiarAsiento = srv.cambiarAsiento(, tipoEstadio, idCompra)
 							proceso.waitFor();
-							System.out.println("La eleccion escogida ha sido: " + salida);
-							break;
+
+							boolean cambiarAsiento = srv.cambiarAsiento(Integer.parseInt(grada), idCompra);
+							if (cambiarAsiento == false) {
+								System.out.println("> ¡¡ERROR AL CAMBIAR EL ASIENTO!!!. INTENTELO DE NUEVO MÁS TARDE...\n");
+							}
+							else
+							System.out.println("> ¡¡ASIENTO CAMBIADO CON ÉXITO\n!!");
+							
+							
+							System.out.print("> Pulse enter para continuar\n>");
+							if (ent.hasNextLine()) {
+									salto = ent.nextLine();
+									break;
+							}	
 						}
 
 						case 6: {

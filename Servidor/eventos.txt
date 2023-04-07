@@ -1,20 +1,20 @@
-1	Ricky Martin	2023-05-15	Palau Sant Jordi	Barcelona	20000
-2	Carlos Rivera	2023-06-03	Auditorio Nacional de México	Ciudad de México	10000
-3	Maluma	2023-06-05	Arena Ciudad de México	Ciudad de México	18000
-4	Shakira	2023-06-10	Estadio Metropolitano de Barranquilla	Barranquilla	30000
-5	Bruno Mars	2023-06-15	Estadio Olímpico de Roma	Roma	25000
-6	Ed Sheeran	2023-06-20	London Stadium	Londres	60000
-7	Alejandro Fernández	2023-06-25	Auditorio Nacional de México	Ciudad de México	10000
-8	David Bisbal	2023-07-01	Wizink Center	Madrid	17000
-9	Enrique Iglesias	2023-07-07	Movistar Arena	Bogotá	18000
-10	Pitbull	2023-07-10	Hard Rock Stadium	Miami	40000
-11	CNCO	2023-07-15	Estadio El Campín	Bogotá	20000
-12	Jennifer López	2023-07-20	The O2 Arena	Londres	20000
-13	Marc Anthony	2023-07-25	AmericanAirlines Arena	Miami	15000
-14	Nicky Jam	2023-08-01	Barclaycard Arena	Hamburg	12000
-15	Karol G	2023-08-05	Movistar Arena	Bogotá	18000
-16	J Balvin	2023-08-10	Palacio de los Deportes	Madrid	17000
-17	Luis Fonsi	2023-08-15	Movistar Arena	Bogotá	12000
-18	Daddy Yankee	2023-08-20	Arena Ciudad de México	Ciudad de México	18000
-19	Ozuna	2023-08-25	Wizink Center	Madrid	17000
-20	Sebastián Yatra	2023-09-01	Auditorio Nacional de México	Ciudad de México	10000
+1	Ricky Martin	2023-05-15	Palau Sant Jordi	Barcelona	20000   1
+2	Carlos Rivera	2023-06-03	Auditorio Nacional de México	Ciudad de México	10000   2
+3	Maluma	2023-06-05	Arena Ciudad de México	Ciudad de México	18000   3
+4	Shakira	2023-06-10	Estadio Metropolitano de Barranquilla	Barranquilla	30000   3
+5	Bruno Mars	2023-06-15	Estadio Olímpico de Roma	Roma	25000   2
+6	Ed Sheeran	2023-06-20	London Stadium	Londres	60000   1
+7	Alejandro Fernández	2023-06-25	Auditorio Nacional de México	Ciudad de México	10000   1
+8	David Bisbal	2023-07-01	Wizink Center	Madrid	17000   2
+9	Enrique Iglesias	2023-07-07	Movistar Arena	Bogotá	18000   3
+10	Pitbull	2023-07-10	Hard Rock Stadium	Miami	40000   3
+11	CNCO	2023-07-15	Estadio El Campín	Bogotá	20000   3
+12	Jennifer López	2023-07-20	The O2 Arena	Londres	20000   2
+13	Marc Anthony	2023-07-25	AmericanAirlines Arena	Miami	15000   2
+14	Nicky Jam	2023-08-01	Barclaycard Arena	Hamburg	12000   1
+15	Karol G	2023-08-05	Movistar Arena	Bogotá	18000   1
+16	J Balvin	2023-08-10	Palacio de los Deportes	Madrid	17000   2
+17	Luis Fonsi	2023-08-15	Movistar Arena	Bogotá	12000   2
+18	Daddy Yankee	2023-08-20	Arena Ciudad de México	Ciudad de México	18000   2
+19	Ozuna	2023-08-25	Wizink Center	Madrid	17000   3
+20	Sebastián Yatra	2023-09-01	Auditorio Nacional de México	Ciudad de México	10000   1

@@ -19,10 +19,10 @@ class ServicioEntradasImpl extends UnicastRemoteObject implements ServicioEntrad
 
     }
 
-    public Entrada comprarEntrada(int idEvento,int entradasSolicitadas,String nombre,String dni) throws RemoteException {
+    public Entrada comprarEntrada(int idEvento,int entradasSolicitadas,String nombre,String dni,int numGrada) throws RemoteException {
 
         //EntradasDAO comprar = new EntradasDAO();
-        entrada = entradasDAO.obtenerEntrada(idEvento,entradasSolicitadas,nombre,dni);
+        entrada = entradasDAO.obtenerEntrada(idEvento,entradasSolicitadas,nombre,dni,numGrada);
         return entrada;
 
     }
@@ -45,4 +45,16 @@ class ServicioEntradasImpl extends UnicastRemoteObject implements ServicioEntrad
         resultado = entradasDAO.cerraBBDD();
         return resultado;
     }*/
+
+    public boolean cambiarAsiento(int numGrada,int idCompra) throws RemoteException{
+        resultado = entradasDAO.actualizaGrada(numGrada,idCompra);
+        return resultado;
+    }
+
+    public int obtenerEscenario(int idCompra) throws RemoteException{
+        int escenario = entradasDAO.obtenerEscenario(idCompra);
+        return escenario;
+    }
+        
+
 }

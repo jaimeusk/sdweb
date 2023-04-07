@@ -14,8 +14,8 @@ class ServicioEventosImpl extends UnicastRemoteObject implements ServicioEventos
         eventosDAO = new EventosDAO();
     }
 
-    public boolean crearEvento (String artista,String fecha,String lugar,String ciudad,int entradas) throws RemoteException {
-        Evento evento = new Evento (artista,fecha,lugar,ciudad,entradas);        
+    public boolean crearEvento (String artista,String fecha,String lugar,String ciudad,int entradas,int tipoEstadio) throws RemoteException {
+        Evento evento = new Evento (artista,fecha,lugar,ciudad,entradas,tipoEstadio);        
         resultado = eventosDAO.agregarEvento(evento);
         return resultado;
     }  

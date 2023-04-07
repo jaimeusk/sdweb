@@ -7,24 +7,27 @@ class Evento implements Serializable{
     private String lugar;
     private String ciudad;
     private int numEntradas;
+    private int tipoEstadio;
 
     public Evento(){}
     
-    public Evento(int id,String artista,String fecha,String lugar,String ciudad,int entradas){
+    public Evento(int id,String artista,String fecha,String lugar,String ciudad,int entradas,int tipoEstadio){
         this.idEvento = id;
         this.artista = artista;
         this.fecha = fecha;
         this.lugar = lugar;
         this.ciudad = ciudad;
         this.numEntradas = entradas;
+        this.tipoEstadio = tipoEstadio;
     }
 
-    public Evento(String artista,String fecha,String lugar,String ciudad,int entradas){
+    public Evento(String artista,String fecha,String lugar,String ciudad,int entradas,int tipoEstadio){
         this.artista = artista;
         this.fecha = fecha;
         this.lugar = lugar;
         this.ciudad = ciudad;
         this.numEntradas = entradas;
+        this.tipoEstadio = tipoEstadio;
     }
     
     public void setId(int id){
@@ -51,6 +54,10 @@ class Evento implements Serializable{
         this.numEntradas = entradas;
     }
 
+    public void setTipoEstadio(int tipoEstadio){
+        this.tipoEstadio = tipoEstadio;
+    }
+
     public int getId(){
         return idEvento;
     }
@@ -73,5 +80,9 @@ class Evento implements Serializable{
 
     public int getEntradas(){
         return numEntradas;
+    }
+
+    public int getTipoEstadio() {
+        return tipoEstadio;
     }
 }

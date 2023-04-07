@@ -31,7 +31,7 @@ class EventosDAO {
             
             Statement st = conn.createStatement();
             
-            String sql = "INSERT INTO eventos (idevento, artista,fecha,lugar,ciudad,numentradas) VALUES (" + ultimoIdEvento + ",'" + evento.getArtista() + "','" + evento.getFecha() + "','" + evento.getLugar() + "','" + evento.getCiudad() + "'," + evento.getEntradas() + ")";
+            String sql = "INSERT INTO eventos (idevento, artista,fecha,lugar,ciudad,numentradas,tipoEstadio) VALUES (" + ultimoIdEvento + ",'" + evento.getArtista() + "','" + evento.getFecha() + "','" + evento.getLugar() + "','" + evento.getCiudad() + "'," + evento.getEntradas() + "," + evento.getTipoEstadio() + ")";
             System.out.println(sql);
             int filas = st.executeUpdate(sql);
 
@@ -108,6 +108,7 @@ class EventosDAO {
                 evento.setFecha(rs.getString("fecha"));
                 evento.setLugar(rs.getString("lugar"));
                 evento.setCiudad(rs.getString("ciudad"));
+                evento.setTipoEstadio(rs.getInt("tipoEstadio"));
             }
 
             System.out.println("Evento " + idEvento +" obtenido con éxito\n");
@@ -141,6 +142,7 @@ class EventosDAO {
                 evento.setLugar(rs.getString("lugar"));
                 evento.setCiudad(rs.getString("ciudad"));
                 evento.setEntradas(rs.getInt("numentradas"));
+                evento.setTipoEstadio(rs.getInt("tipoEstadio"));
                 lista.add(evento);
             }
 

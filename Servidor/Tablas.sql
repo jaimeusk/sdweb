@@ -5,7 +5,8 @@ CREATE TABLE Eventos(
     Fecha VARCHAR(255) NOT NULL,
     Lugar VARCHAR(255) NOT NULL,
     Ciudad VARCHAR(255) NOT NULL,
-    NumEntradas INTEGER NOT NULL 
+    NumEntradas INTEGER NOT NULL,
+    tipoEstadio INTEGER NOT NULL 
 );
 
 CREATE TABLE Compras(
@@ -13,8 +14,8 @@ CREATE TABLE Compras(
     idEvento INTEGER REFERENCES Eventos(idEvento),
     Nombre VARCHAR(255) NOT NULL,
     Dni VARCHAR(255) NOT NULL,
-    Cantidad INTEGER NOT NULL
+    Cantidad INTEGER NOT NULL,
+    Grada INTEGER NOT NULL
 );
 
 \copy Eventos FROM eventos.txt
-\copy Compras FROM compras.txt

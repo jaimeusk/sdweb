@@ -7,6 +7,8 @@ class Entrada implements Serializable{
     private String lugar;
     private String ciudad;
     private int numEntradas;
+    private int numGrada;
+
 
     public Entrada(){}
     
@@ -35,6 +37,11 @@ class Entrada implements Serializable{
         this.numEntradas = entradas;
     }
 
+    public void setGrada(int numGrada){
+        this.numGrada = numGrada;
+    }
+
+
     public int getId(){
         return idCompra;
     }
@@ -58,4 +65,10 @@ class Entrada implements Serializable{
     public int getEntradas(){
         return numEntradas;
     }
+
+    public int getGrada(){
+        return numGrada;
+    }
+
+
 }
