@@ -219,7 +219,7 @@ class EntradasDAO {
                 entrada.setLugar(rs.getString("lugar"));
                 entrada.setFecha(rs.getString("fecha"));
                 entrada.setEntradas(rs.getInt("cantidad"));
-                entrada.setGrada(rs.getInt(rs.getInt("grada")));
+                entrada.setGrada(rs.getInt("grada"));
                 lista.add(entrada);
             }
             rs.close();
@@ -276,7 +276,7 @@ class EntradasDAO {
         int escenario  = 0;
         try{
             Statement st = conn.createStatement();
-            String sql = "SELECT tipoEstadio FROM compras WHERE idcompra=" + idCompra;
+            String sql = "SELECT tipoestadio FROM compras NATURAL JOIN eventos WHERE idcompra=" + idCompra;
             ResultSet rs = st.executeQuery(sql);
             
            while(rs.next()){

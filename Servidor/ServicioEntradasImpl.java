@@ -25,6 +25,7 @@ class ServicioEntradasImpl extends UnicastRemoteObject implements ServicioEntrad
         entrada = entradasDAO.obtenerEntrada(idEvento,entradasSolicitadas,nombre,dni,numGrada);
         return entrada;
 
+        
     }
 
     public boolean cancelarEntrada(int idCompra) throws RemoteException {

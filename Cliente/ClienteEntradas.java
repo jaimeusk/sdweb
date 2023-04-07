@@ -336,8 +336,8 @@ class ClienteEntradas {
 								numEntradas = Integer.parseInt(ent.nextLine());
 							System.out.print("\n");
 							Random ale = new Random();
-							int grada = ale.nextInt(3);
-							System.out.println("> Se ha seleccionado la grada " + grada + "por defecto\n");
+							int grada = ale.nextInt(2) + 1;
+							System.out.println("> Se ha seleccionado la grada " + grada + " por defecto\n");
 
 							entrada = srv.comprarEntrada(idEvento, numEntradas, nombre, DNI, grada); // Pondría para
 																								// comprarEntrada q el
@@ -532,7 +532,7 @@ class ClienteEntradas {
 							System.out.println("| SELECCIONAR MIS ASIENTOS |");
 							System.out.println("============================\n\n");
 
-							System.out.println("Indique el identificador de la compra\n> ");
+							System.out.println("> Indique el identificador de la compra\n> ");
 
 							
 							if (ent.hasNextLine()) {
@@ -540,9 +540,9 @@ class ClienteEntradas {
 							}
 
 							
-							System.out.println("Seleccione la ubicación donde le gustaría estar");
+							System.out.println("> Seleccione la ubicación donde le gustaría estar");
 
-							System.out.println("Mostrando escenario...");
+							System.out.println("> Mostrando escenario...");
 
 							Thread.sleep(1500);
 
