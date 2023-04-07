@@ -581,10 +581,10 @@ class ClienteEntradas {
 
 							Process proceso = pb.start();
 							BufferedReader br = new BufferedReader(new InputStreamReader(proceso.getInputStream()));
-							String salida;
-							salida = br.readLine();
+							String grada;
+							grada = br.readLine();
 							
-							boolean 
+							boolean cambiarAsiento = srv.cambiarAsiento(, tipoEstadio, idCompra)
 							proceso.waitFor();
 							System.out.println("La eleccion escogida ha sido: " + salida);
 							break;
