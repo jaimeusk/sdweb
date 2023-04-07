@@ -7,6 +7,7 @@ import java.lang.ProcessBuilder;
 import java.io.File;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.Random;
 
 class ClienteEntradas {
 
@@ -36,6 +37,7 @@ class ClienteEntradas {
 			String identEntrada = "";
 			String salto = "";
 			int esAdmin = 0;
+			int tipoEstadio = 0;
 			List<Evento> listaEventosDisponibles = new ArrayList<Evento>();
 			List<Entrada> listaEntradasCompradas = new ArrayList<Entrada>();
 
@@ -121,9 +123,29 @@ class ClienteEntradas {
 								numEntradas = Integer.parseInt(ent.nextLine());
 							System.out.print("\n");
 
+							System.out.print("> ¿Que tipo de estadio será?\n");
+							System.out.print("> Estadio 1, 2 o 3\n> ");
+							
+							boolean tipoEstadioCorrecto = false;
+							
+							while (!tipoEstadioCorrecto){
+								tipoEstadio = 0;
+								if (ent.hasNextLine())
+									tipoEstadio = Integer.parseInt(ent.nextLine());
+
+								if(tipoEstadio > 0 && tipoEstadio < 4){
+									tipoEstadioCorrecto = true;
+								} else {
+									System.out.print("> Tipo de estadio seleccionado erróneo\n>");
+									System.out.print("> Seleccione estadio 1, 2 o 3\n> ");
+								}
+							}
+								
+							System.out.print("\n");
+
 							boolean resultadoCreaEvento;
 							resultadoCreaEvento = srvEvent.crearEvento(nombreArtista, fechaEvento, fechaEvento,
-									ciudadEvento, numEntradas);
+									ciudadEvento, numEntradas, tipoEstadio);
 
 							Thread.sleep(2000);
 
@@ -147,24 +169,7 @@ class ClienteEntradas {
 							System.out.println("|   BORRAR UN EVENTO   |");
 							System.out.println("========================\n\n");
 
-							System.out.print("> Introduzca el identificador del evento que desea borrar\n>"); // ¿De
-																												// donde
-																												// se
-																												// obtiene
-																												// el id
-																												// de la
-																												// compra.
-																												// No
-																												// sería
-																												// mejor
-																												// introducir
-																												// el id
-																												// del
-																												// evento
-																												// y el
-																												// dni
-																												// del
-																												// comprador?
+							System.out.print("> Introduzca el identificador del evento que desea borrar\n>");
 							if (ent.hasNextLine())
 								idEvento = Integer.parseInt(ent.nextLine());
 							System.out.print("\n");
@@ -206,6 +211,7 @@ class ClienteEntradas {
 								System.out.println("> CIUDAD DONDE SE CELEBRA: " + event.getCiudad());
 								System.out.println("> LUGAR DEL EVENTO: " + event.getLugar());
 								System.out.println("> NUMERO DE ENTRADAS DISPONIBLES: " + event.getEntradas());
+								System.out.println("> TIPO DE ESTADIO: " + event.getTipoEstadio());
 								System.out.println("--------------------------------------------");
 							}
 							System.out.print("\n");
@@ -242,6 +248,7 @@ class ClienteEntradas {
 								System.out.println("> CIUDAD DONDE SE CELEBRA: " + evento.getCiudad());
 								System.out.println("> LUGAR DEL EVENTO: " + evento.getLugar());
 								System.out.println("> NUMERO DE ENTRADAS DISPONIBLES: " + evento.getEntradas());
+								System.out.println("> TIPO DE ESTADIO: " + evento.getTipoEstadio());
 								System.out.println("--------------------------------------------");
 							}
 
@@ -328,8 +335,11 @@ class ClienteEntradas {
 							if (ent.hasNextLine())
 								numEntradas = Integer.parseInt(ent.nextLine());
 							System.out.print("\n");
+							Random ale = new Random();
+							int grada = ale.nextInt(3);
+							System.out.println("> Se ha seleccionado la grada " + grada + "por defecto\n");
 
-							entrada = srv.comprarEntrada(idEvento, numEntradas, nombre, DNI); // Pondría para
+							entrada = srv.comprarEntrada(idEvento, numEntradas, nombre, DNI, grada); // Pondría para
 																								// comprarEntrada q el
 																								// valor devuelto sea un
 																								// boolean para
@@ -467,6 +477,7 @@ class ClienteEntradas {
 									System.out.println("> ID DE LA COMPRA DE LA ENTRADA: " + entra.getId());
 									System.out.println("> NOMBRE DEL ARTISTA: " + entra.getArtista());
 									System.out.println("> CANTIDAD DE ENTRADAS COMPRADAS: " + entra.getEntradas());
+									System.out.println("> GRADA: " + entra.getGrada());
 									System.out.println("--------------------------------------------");
 								}
 							}
@@ -520,21 +531,22 @@ class ClienteEntradas {
 							System.out.println("============================");
 							System.out.println("| SELECCIONAR MIS ASIENTOS |");
 							System.out.println("============================\n\n");
-							System.out.println("Seleccione la ubicación donde le gustaría estar");
 
-							Thread.sleep(1000);
-							System.out.print("Seleccione el tipo de escenario\n>"); // Este numero te lo tendría que dar
-																					// el servidor, y en función de
-																					// esto, se llamaría a un gráfico o
-																					// a otro.
+							System.out.println("Indique el identificador de la compra\n> ");
 
+							
 							if (ent.hasNextLine()) {
-								escenario = Integer.parseInt(ent.nextLine());
+								idCompra = Integer.parseInt(ent.nextLine());
 							}
+
+							
+							System.out.println("Seleccione la ubicación donde le gustaría estar");
 
 							System.out.println("Mostrando escenario...");
 
 							Thread.sleep(1500);
+
+							escenario = srv.obtenerEscenario(idCompra);
 
 							ProcessBuilder pb = new ProcessBuilder();
 
@@ -563,7 +575,7 @@ class ClienteEntradas {
 								pb.command(Arrays.asList("java", "Grafico3"))
 										.directory(new File(rutaFichero));
 							} else {
-
+								System.out.println("> ¡¡ERROR AL CAMBIAR EL ASIENTO!!!. INTENTELO DE NUEVO MÁS TARDE...\n");
 								break;
 							}
 
@@ -571,7 +583,8 @@ class ClienteEntradas {
 							BufferedReader br = new BufferedReader(new InputStreamReader(proceso.getInputStream()));
 							String salida;
 							salida = br.readLine();
-
+							
+							s
 							proceso.waitFor();
 							System.out.println("La eleccion escogida ha sido: " + salida);
 							break;
