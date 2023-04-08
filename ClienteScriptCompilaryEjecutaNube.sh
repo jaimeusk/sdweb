@@ -6,4 +6,4 @@ cp Servidor/ServicioEventos.class Cliente/ServicioEventos.class
 cp Servidor/FabricaServicioEvento.class Cliente/FabricaServicioEvento.class
 cd Cliente
 javac *.java
-java -Djava.security.policy=cliente.permisos -Djava.net.preferIPv4Stack=true ClienteEntradas 127.0.0.1 51000 54321
+java -Djava.security.policy=cliente.permisos -Djava.net.preferIPv4Stack=true ClienteEntradas 93.189.94.195 localhost 51000 54321

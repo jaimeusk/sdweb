@@ -16,7 +16,7 @@ class ServidorEntradas{
 
         try{
             ServicioEntradasImpl srvEntradas = new ServicioEntradasImpl();
-            Naming.rebind("rmi://localhost:" + args[0] + "/Entrada",srvEntradas);
+            Naming.rebind("rmi://93.189.94.195:" + args[0] + "/Entrada",srvEntradas);
 
         }catch(RemoteException e){
             System.err.println("Error de comunicación: " + e.toString());

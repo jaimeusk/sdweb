@@ -16,8 +16,8 @@ class ClienteEntradas {
 
 	static public void main(String args[]) {
 
-		if (args.length != 3) {
-			System.err.println("Uso: ClienteEntrada hostregistro numPuertoSrvEntradas numPuertoSrvEventos");
+		if (args.length != 4) {
+			System.err.println("Uso: ClienteEntrada hostregistroEntradas hostregistroEventos numPuertoSrvEntradas numPuertoSrvEventos");
 			return;
 		}
 
@@ -48,9 +48,11 @@ class ClienteEntradas {
 
 			Entrada entrada = new Entrada();
 			Evento evento = new Evento();
-			ServicioEntradas srv = (ServicioEntradas) Naming.lookup("//" + args[0] + ":" + args[1] + "/Entrada");
+			System.out.println("Creando conexion con servidor entradas");
+			ServicioEntradas srv = (ServicioEntradas) Naming.lookup("//" + args[0] + ":" + args[2] + "/Entrada");
+			System.out.println("Conexion creada");
 			FabricaServicioEvento fabricaE = (FabricaServicioEvento) Naming
-					.lookup("//" + args[0] + ":" + args[2] + "/Eventos");
+					.lookup("//" + args[1] + ":" + args[3] + "/Eventos");
 			ServicioEventos srvEvent = fabricaE.crearServicioEvento();
 			Scanner ent = new Scanner(System.in);
 			System.out.println("\n\n==================================");
