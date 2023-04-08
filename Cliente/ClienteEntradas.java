@@ -63,7 +63,7 @@ class ClienteEntradas {
 			System.out.println("|    ¿ES USTED ADMINISTRADOR?    |");
 			System.out.println("==================================");
 
-			System.out.print("Introduzca 1 si es admin y 2 si es un usuario\n>");
+			System.out.print("Introduzca 1 si es admin y 2 si es un usuario\n> ");
 
 			if (ent.hasNextLine())
 				esAdmin = Integer.parseInt(ent.nextLine());
@@ -100,27 +100,27 @@ class ClienteEntradas {
 							System.out.println("|   CREAR UN EVENTO   |");
 							System.out.println("=======================\n\n");
 
-							System.out.print("> ¿Cuál es el nombre del artista?\n>");
+							System.out.print("> ¿Cuál es el nombre del artista?\n> ");
 							if (ent.hasNextLine())
 								nombreArtista = ent.nextLine();
 							System.out.print("\n");
 
-							System.out.print("> ¿En que ciudad será el evento?\n>");
+							System.out.print("> ¿En que ciudad será el evento?\n> ");
 							if (ent.hasNextLine())
 								ciudadEvento = ent.nextLine();
 							System.out.print("\n");
 
-							System.out.print("> ¿En que recinto se celebrará el evento?\n>");
+							System.out.print("> ¿En que recinto se celebrará el evento?\n> ");
 							if (ent.hasNextLine())
 								recintoEvento = ent.nextLine();
 							System.out.print("\n");
 
-							System.out.print("> ¿En que fecha será el evento? (aaaa-mm-dd)\n>");
+							System.out.print("> ¿En que fecha será el evento? (aaaa-mm-dd)\n> ");
 							if (ent.hasNextLine())
 								fechaEvento = ent.nextLine();
 							System.out.print("\n");
 
-							System.out.print("> ¿Cuántas entradas habrá disponibles?\n>");
+							System.out.print("> ¿Cuántas entradas habrá disponibles?\n> ");
 							if (ent.hasNextLine())
 								numEntradas = Integer.parseInt(ent.nextLine());
 							System.out.print("\n");
@@ -138,7 +138,7 @@ class ClienteEntradas {
 								if(tipoEstadio > 0 && tipoEstadio < 4){
 									tipoEstadioCorrecto = true;
 								} else {
-									System.out.print("> Tipo de estadio seleccionado erróneo\n>");
+									System.out.print("> Tipo de estadio seleccionado erróneo\n");
 									System.out.print("> Seleccione estadio 1, 2 o 3\n> ");
 								}
 							}
@@ -152,12 +152,12 @@ class ClienteEntradas {
 							Thread.sleep(2000);
 
 							if (resultadoCreaEvento == true) {
-								System.out.println("¡¡EVENTO CREADO CON ÉXITO!!\n");
+								System.out.println("> ¡¡EVENTO CREADO CON ÉXITO!!\n");
 							} else {
-								System.out.println("¡¡ERROR AL CREAR EVENTO!!\n");
+								System.out.println("> ¡¡ERROR AL CREAR EVENTO!!\n");
 							}
 
-							System.out.print("> Pulse enter para continuar\n>");
+							System.out.print("> Pulse enter para continuar\n> ");
 							if (ent.hasNextLine()) {
 								salto = ent.nextLine();
 								break;
@@ -171,23 +171,23 @@ class ClienteEntradas {
 							System.out.println("|   BORRAR UN EVENTO   |");
 							System.out.println("========================\n\n");
 
-							System.out.print("> Introduzca el identificador del evento que desea borrar\n>");
+							System.out.print("> Introduzca el identificador del evento que desea borrar\n> ");
 							if (ent.hasNextLine())
 								idEvento = Integer.parseInt(ent.nextLine());
 							System.out.print("\n");
 
 							if ((srvEvent.borrarEvento(idEvento))) {
-								System.out.println("¡¡EVENTO BORRADO CON CON ÉXITO!!\n");
-								System.out.println("¡¡ENTRADAS ASOCIADAS AL EVENTO BORRADAS CON ÉXITO!!\n");
+								System.out.println("> ¡¡EVENTO BORRADO CON CON ÉXITO!!\n");
+								System.out.println("> ¡¡ENTRADAS ASOCIADAS AL EVENTO BORRADAS CON ÉXITO!!\n");
 							}
 
 							else {
-								System.out.println("ERROR AL BORRAR EL EVENTO.");
+								System.out.println("> ERROR AL BORRAR EL EVENTO.");
 								System.out.println(
-										"POR FAVOR, INTENTELO DE NUEVO MÁS TARDE O CONSULTE AL ADMINISTRADOR\n");
+										"> POR FAVOR, INTENTELO DE NUEVO MÁS TARDE O CONSULTE AL ADMINISTRADOR\n");
 							}
 
-							System.out.print("> Pulse enter para continuar\n>");
+							System.out.print("> Pulse enter para continuar\n> ");
 							if (ent.hasNextLine()) {
 								salto = ent.nextLine();
 								break;
@@ -204,6 +204,7 @@ class ClienteEntradas {
 							listaEventosDisponibles = srvEvent.listarEventos();
 
 							Iterator i = listaEventosDisponibles.iterator();
+							System.out.println("--------------------------------------------");
 							while (i.hasNext()) {
 								Evento event = (Evento) i.next();
 								System.out.println("--------------------------------------------");
@@ -216,9 +217,10 @@ class ClienteEntradas {
 								System.out.println("> TIPO DE ESTADIO: " + event.getTipoEstadio());
 								System.out.println("--------------------------------------------");
 							}
+							System.out.println("--------------------------------------------");
 							System.out.print("\n");
 
-							System.out.print("> Pulse enter para continuar\n>");
+							System.out.print("> Pulse enter para continuar\n> ");
 							if (ent.hasNextLine()) {
 								salto = ent.nextLine();
 								break;
@@ -241,7 +243,7 @@ class ClienteEntradas {
 							evento = srvEvent.listarDetalleEvento(idEvento);
 
 							if ((evento.getId()) != idEvento) {
-								System.out.println("NO EXISTE UN EVENTO CON ESE IDENTIFICADOR");
+								System.out.println("> NO EXISTE UN EVENTO CON ESE IDENTIFICADOR");
 							} else {
 								System.out.println("--------------------------------------------");
 								System.out.println("> ID DEL EVENTO: " + evento.getId());
@@ -256,7 +258,7 @@ class ClienteEntradas {
 
 							System.out.print("\n");
 
-							System.out.print("> Pulse enter para continuar\n>");
+							System.out.print("> Pulse enter para continuar\n> ");
 							if (ent.hasNextLine()) {
 								salto = ent.nextLine();
 								break;
@@ -266,14 +268,14 @@ class ClienteEntradas {
 
 						case 5: {
 
-							System.out.println("SALIENDO DEL SERVICIO DE EVENTOS...");
+							System.out.println("> SALIENDO DEL SERVICIO DE EVENTOS...");
 							Thread.sleep(2000);
 							return;
 						}
 
 						default: {
-							System.out.println("OPCIÓN NO VÁLIDA\n");
-							System.out.print("> Pulse enter para continuar\n>");
+							System.out.println("> OPCIÓN NO VÁLIDA\n");
+							System.out.print("> Pulse enter para continuar\n> ");
 
 							if (ent.hasNextLine()) {
 								salto = ent.nextLine();
@@ -287,16 +289,16 @@ class ClienteEntradas {
 				// COMIENZA EL MENU USUARIO
 			} else {
 
-				System.out.print("Introduzca su nombre \n>");
+				System.out.print("> Introduzca su nombre \n> ");
 				if (ent.hasNextLine())
 					nombre = ent.nextLine();
 
-				System.out.print("Introduzca su apellido \n>");
+				System.out.print("> Introduzca su apellido \n> ");
 				if (ent.hasNextLine())
 					apellido = ent.nextLine();
 				nombre = nombre + " " + apellido;
 
-				System.out.print("Introduza su DNI \n>");
+				System.out.print("> Introduza su DNI \n> ");
 				if (ent.hasNextLine())
 					DNI = ent.nextLine();
 				System.out.print("\n");
@@ -329,11 +331,11 @@ class ClienteEntradas {
 							System.out.println("| COMPRAR UNA ENTRADA |");
 							System.out.println("=======================\n\n");
 
-							System.out.print("> Seleccione el evento al que desea acudir\n>");
+							System.out.print("> Seleccione el evento al que desea acudir\n> ");
 							if (ent.hasNextLine())
 								idEvento = Integer.parseInt(ent.nextLine());
 							System.out.print("\n");
-							System.out.print("> Seleccione el número de entradas que desea comprar\n>");
+							System.out.print("> Seleccione el número de entradas que desea comprar\n> ");
 							if (ent.hasNextLine())
 								numEntradas = Integer.parseInt(ent.nextLine());
 							System.out.print("\n");
@@ -362,18 +364,18 @@ class ClienteEntradas {
 							 */
 							if (entrada == null) {
 								Thread.sleep(2000);
-								System.out.println("¡¡ERROR. EVENTO NO EXISTE!!\n");
+								System.out.println("> ¡¡ERROR. EVENTO NO EXISTE!!\n");
 							} else if (entrada.getEntradas() != 0) {
 								Thread.sleep(2000);
 								System.out.println(
-										"¡¡ERROR. NO QUEDAN SUFICIENTES ENTRADAS DISPONIBLES. Entradas disponibles actualmente: "
+										"> ¡¡ERROR. NO QUEDAN SUFICIENTES ENTRADAS DISPONIBLES. Entradas disponibles actualmente: "
 												+ entrada.getEntradas() + "\n");
 							} else {
 								Thread.sleep(2000);
-								System.out.println("¡¡ENTRADA COMPRADA CON ÉXITO!!\n");
+								System.out.println("> ¡¡ENTRADA COMPRADA CON ÉXITO!!\n");
 							}
 
-							System.out.print("> Pulse enter para continuar\n>");
+							System.out.print("> Pulse enter para continuar\n> ");
 							if (ent.hasNextLine()) {
 								salto = ent.nextLine();
 								break;
@@ -386,7 +388,7 @@ class ClienteEntradas {
 							System.out.println("| CANCELAR UNA ENTRADA |");
 							System.out.println("========================\n\n");
 
-							System.out.print("> Introduzca el identificador de la compra de la entrada\n>"); // ¿De
+							System.out.print("> Introduzca el identificador de la compra de la entrada\n> "); // ¿De
 																												// donde
 																												// se
 																												// obtiene
@@ -410,14 +412,14 @@ class ClienteEntradas {
 
 							if ((srv.cancelarEntrada(idCompra)) == true) {
 								Thread.sleep(2000);
-								System.out.println("¡¡ENTRADA ANULADA CON ÉXITO!!\n");
+								System.out.println("> ¡¡ENTRADA ANULADA CON ÉXITO!!\n");
 							} else {
 								Thread.sleep(2000);
 								System.out.println(
-										"FALLO ANULANDO LA ENTRADA. POR FAVOR, INTENTELO DE NUEVO MÁS TARDE...\n");
+										"> FALLO ANULANDO LA ENTRADA. POR FAVOR, INTENTELO DE NUEVO MÁS TARDE...\n");
 							}
 
-							System.out.print("> Pulse enter para continuar\n>");
+							System.out.print("> Pulse enter para continuar\n> ");
 							if (ent.hasNextLine()) {
 								salto = ent.nextLine();
 								break;
@@ -440,6 +442,7 @@ class ClienteEntradas {
 							listaEventosDisponibles = srvEvent.listarEventos();
 
 							Iterator i = listaEventosDisponibles.iterator();
+							System.out.println("--------------------------------------------");
 							while (i.hasNext()) {
 								Evento event = (Evento) i.next();
 								System.out.println("--------------------------------------------");
@@ -451,9 +454,10 @@ class ClienteEntradas {
 								System.out.println("> NUMERO DE ENTRADAS DISPONIBLES: " + event.getEntradas());
 								System.out.println("--------------------------------------------");
 							}
+							System.out.println("--------------------------------------------");
 							System.out.print("\n");
 
-							System.out.print("> Pulse enter para continuar\n>");
+							System.out.print("> Pulse enter para continuar\n> ");
 							if (ent.hasNextLine()) {
 								salto = ent.nextLine();
 								break;
@@ -470,7 +474,7 @@ class ClienteEntradas {
 							listaEntradasCompradas = srv.listarEntradas(DNI);
 
 							if ((listaEntradasCompradas.isEmpty()) == true) {
-								System.out.println("NO HAY NINGUNA ENTRADA COMPRADA");
+								System.out.println("> NO HAY NINGUNA ENTRADA COMPRADA");
 							} else {
 								Iterator i = listaEntradasCompradas.iterator();
 								while (i.hasNext()) {
@@ -485,7 +489,7 @@ class ClienteEntradas {
 							}
 							System.out.print("\n");
 
-							System.out.print("> Pulse enter para continuar\n>");
+							System.out.print("> Pulse enter para continuar\n> ");
 							if (ent.hasNextLine()) {
 								salto = ent.nextLine();
 								break;
@@ -534,7 +538,7 @@ class ClienteEntradas {
 							System.out.println("| SELECCIONAR MIS ASIENTOS |");
 							System.out.println("============================\n\n");
 
-							System.out.println("> Indique el identificador de la compra\n> ");
+							System.out.print("> Indique el identificador de la compra\n> ");
 
 							
 							if (ent.hasNextLine()) {
@@ -593,10 +597,10 @@ class ClienteEntradas {
 								System.out.println("> ¡¡ERROR AL CAMBIAR EL ASIENTO!!!. INTENTELO DE NUEVO MÁS TARDE...\n");
 							}
 							else
-							System.out.println("> ¡¡ASIENTO CAMBIADO CON ÉXITO\n!!");
+							System.out.println("> ¡¡ASIENTO CAMBIADO CON ÉXITO!!\n");
 							
 							
-							System.out.print("> Pulse enter para continuar\n>");
+							System.out.print("> Pulse enter para continuar\n> ");
 							if (ent.hasNextLine()) {
 									salto = ent.nextLine();
 									break;
@@ -605,7 +609,7 @@ class ClienteEntradas {
 
 						case 6: {
 
-							System.out.println("SALIENDO DE LA VENTA DE ENTRADAS...");
+							System.out.println("> SALIENDO DE LA VENTA DE ENTRADAS...");
 							Thread.sleep(2000);
 							return;
 							/*
@@ -624,9 +628,9 @@ class ClienteEntradas {
 
 						default: {
 
-							System.out.println("OPCIÓN NO VÁLIDA\n");
+							System.out.println("> OPCIÓN NO VÁLIDA\n");
 
-							System.out.print("> Pulse enter para continuar\n>");
+							System.out.print("> Pulse enter para continuar\n> ");
 							if (ent.hasNextLine()) {
 								salto = ent.nextLine();
 								break;

@@ -81,23 +81,23 @@ public class Grafico3 extends JFrame {
 
 		Grafico3 objeto = new Grafico3(1);
 
-		JButton b1 = new JButton("FRONT STAGE");
+		JButton b1 = new JButton("GRADA 1");
 		b1.setBounds(870, 130, 160, 50);
 		contentPane.add(b1);
 
-		JButton b2 = new JButton("PISTA");
+		JButton b2 = new JButton("GRADA 2");
 		b2.setBounds(870, 190, 160, 50);
 		contentPane.add(b2);
 
-		JButton b3 = new JButton("GRADA 1");
+		JButton b3 = new JButton("GRADA 3");
 		b3.setBounds(870, 250, 160, 50);
 		contentPane.add(b3);
 
-		JButton b4 = new JButton("GRADA 2");
+		JButton b4 = new JButton("GRADA 4");
 		b4.setBounds(870, 310, 160, 50);
 		contentPane.add(b4);
 
-		JButton b5 = new JButton("GRADA 3");
+		JButton b5 = new JButton("GRADA 5");
 		b5.setBounds(870, 370, 160, 50);
 		contentPane.add(b5);
 
@@ -286,13 +286,14 @@ public class Grafico3 extends JFrame {
 		g.fillRect(352, 631, 299, 89);
 
 		g.setColor(Color.WHITE);
+		g.setFont(new Font("Arial", Font.BOLD, 17));
+		g.drawString("GRADA 1", 312, 420);
 		g.setFont(new Font("Arial", Font.BOLD, 20));
-		g.drawString("Escenario", 150, 420);
-		g.drawString("100", 325, 420);
-		g.drawString("450", 510, 420);
-		g.drawString("350", 710, 420);
-		g.drawString("150", 480, 175);
-		g.drawString("150", 480, 675);
+		g.drawString("ESCENARIO", 145, 420);
+		g.drawString("GRADA 2", 490, 420);
+		g.drawString("GRADA 3", 690, 420);
+		g.drawString("GRADA 4", 470, 175);
+		g.drawString("GRADA 5", 470, 680);
 
 	}
 
